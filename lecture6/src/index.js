@@ -11,7 +11,13 @@ const PORT = process.env.PORT || 8000;
 // Connect to database and start server
 const startServer = async () => {
     try {
-        await connectDB();
+        await connectDB()
+        .then(() => {app.listen( PORT),() =>{
+            console.log(`Server is running on port ${PORT}`); 
+        } })
+        .catch((error) => {
+            console.error("Database connection failed:", error);
+        })
         
         app.on("error", (error) => {
             console.error("Express app error:", error);
