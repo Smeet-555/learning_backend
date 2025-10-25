@@ -53,7 +53,6 @@ const app = express()
 
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
-// 1. DO NOT IMPORT 'app' HERE ANYMORE
 
 dotenv.config({
     path: './.env'
@@ -61,8 +60,6 @@ dotenv.config({
 
 connectDB()
 .then(async () => {
-    // 2. IMPORT 'app' HERE, INSIDE THE .then() BLOCK
-    // This guarantees the database is connected BEFORE your app loads
     const { app } = await import("./app.js"); 
 
     app.on("error", (error) => {
